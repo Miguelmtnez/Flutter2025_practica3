@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../repository/repository_ejemplo.dart';
 import '../models/provincia.dart';
+import 'comarcas_screen.dart';
 
 class ProvinciaRoundButton extends StatelessWidget {
   final Provincia provincia;
@@ -51,7 +52,21 @@ class ProvinciasScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: provincias
-              .map((provincia) => ProvinciaRoundButton(provincia: provincia))
+              .map(
+                (provincia) => GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ComarcasScreen(
+                          provinceName: provincia.nombre,
+                        ),
+                      ),
+                    );
+                  },
+                  child: ProvinciaRoundButton(provincia: provincia),
+                ),
+              )
               .toList(),
         ),
       ),
